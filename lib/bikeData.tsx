@@ -140,7 +140,8 @@ const FlashIcon = () => (
 export const strikeShadow: BikePageData = {
   name: "Strike Shadow",
   slug: "strike-shadow",
-  shopifyHandle: "strike-shadow", // ← update to match your Shopify product handle
+  shopifyHandle: "strike-shadow",
+  shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/1779700106:1",
   tagline: "Stealth mode. Maximum impact.",
   description:
     "Designed for high-performance off-road riding. The Strike Shadow pairs 7kW of peak power with a reinforced steel frame, Fast Ace suspension, and Samsung lithium-ion efficiency — built for riders who refuse to be held back.",
@@ -369,6 +370,7 @@ export const falcon: BikePageData = {
         "/falcon/wheels.jpg",
       ],
       available: true,
+      shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789995180098:1",
     },
     {
       id: "black",
@@ -386,6 +388,7 @@ export const falcon: BikePageData = {
         "/falcon/blackwheels.jpg",
       ],
       available: true,
+      shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789995212866:1",
     },
   ],
 };
@@ -394,7 +397,8 @@ export const falcon: BikePageData = {
 export const arcticLeopard: BikePageData = {
   name: "Arctic Leopard",
   slug: "arctic-leopard",
-  shopifyHandle: "arctic-leopard", // ← update to match your Shopify product handle
+  shopifyHandle: "arctic-leopard",
+  shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/36218730676290:1",
   tagline: "Relentless in any condition.",
   description:
     "20kW peak power. 500–600 Nm of direct-drive torque. Up to 160 km in Eco. The Arctic Leopard XE Pro S is engineered for riders who demand the absolute maximum — on any terrain, in any condition.",
@@ -614,6 +618,7 @@ export const ultraBee: BikePageData = {
         "/ultrabee/wheels.jpg",
       ],
       available: true,
+      shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789988823106:1",
     },
     {
       id: "desert-brown",
@@ -632,6 +637,7 @@ export const ultraBee: BikePageData = {
         "/ultrabee/brownwheels.jpg",
       ],
       available: true,
+      shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789988855874:1",
     },
   ],
 };
@@ -812,6 +818,7 @@ export const lbxBike: BikePageData = {
         "/lbx/purplewheels.jpg",
       ],
       available: true,
+      shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789977256002:1",
     },
     {
       id: "green",

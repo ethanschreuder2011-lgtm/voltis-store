@@ -12,13 +12,15 @@ function NavLink({ label, href }: { label: string; href: string }) {
   const pathname = usePathname();
   const isActive = href.startsWith("/") && pathname === href;
 
-  const baseCls = `relative group flex flex-col items-center gap-[4px] text-[10.5px] font-semibold uppercase tracking-[0.22em] transition-all duration-200 ${
+  const baseCls = `relative group flex items-center leading-none text-[10.5px] font-semibold uppercase tracking-[0.22em] transition-all duration-200 ${
     isActive ? "text-white" : "text-white/45 hover:text-white/90"
   }`;
 
+  // Dot is absolutely positioned below the text — kept out of the layout flow
+  // so it doesn't affect the height/alignment of the nav row.
   const indicator = (
     <motion.span
-      className="w-[3px] h-[3px] rounded-full bg-purple-400"
+      className="absolute -bottom-[7px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-purple-400 pointer-events-none"
       initial={false}
       animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.4 }}
       transition={{ duration: 0.18 }}
@@ -28,7 +30,7 @@ function NavLink({ label, href }: { label: string; href: string }) {
   if (href.startsWith("/")) {
     return (
       <Link href={href} className={baseCls}>
-        <span>{label}</span>
+        {label}
         {indicator}
       </Link>
     );
@@ -36,8 +38,14 @@ function NavLink({ label, href }: { label: string; href: string }) {
 
   return (
     <button onClick={() => scrollTo(href)} className={baseCls}>
-      <span>{label}</span>
-      <span className="w-[3px] h-[3px] rounded-full bg-purple-400/70 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+      {label}
+      <motion.span
+        className="absolute -bottom-[7px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-purple-400/70 pointer-events-none"
+        initial={false}
+        animate={{ opacity: 0, scale: 0.4 }}
+        whileHover={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.18 }}
+      />
     </button>
   );
 }
@@ -81,11 +89,11 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-2.5 shrink-0 z-10">
-            <div className="flex flex-col leading-none">
-              <span className="text-[15px] md:text-[14px] font-black tracking-[0.26em] text-white group-hover:text-white/85 transition-colors duration-200 uppercase">
+            <div className="flex flex-col justify-center leading-none gap-[3px]">
+              <span className="text-[14px] font-black tracking-[0.26em] text-white group-hover:text-white/85 transition-colors duration-200 uppercase leading-none">
                 Voltis
               </span>
-              <span className="text-[7px] uppercase tracking-[0.44em] text-white/30 group-hover:text-white/45 font-semibold transition-colors duration-200 mt-[2.5px]">
+              <span className="text-[7px] uppercase tracking-[0.44em] text-white/30 group-hover:text-white/45 font-semibold transition-colors duration-200 leading-none">
                 Emoto
               </span>
             </div>
