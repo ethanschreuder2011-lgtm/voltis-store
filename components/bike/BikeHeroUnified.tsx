@@ -1041,7 +1041,7 @@ export function BikeHeroUnified({ bike, variants, activeVariantId, onVariantChan
           >
             <ShopifyCheckoutButton
               shopifyHandle={bike.shopifyHandle}
-              shopifyCartUrl={bike.shopifyCartUrl}
+              shopifyCartUrl={activeVariantCartUrl}
               className="bg-purple-600 hover:bg-purple-500 active:scale-95 transition-all duration-200 font-semibold tracking-wide shadow-[0_0_24px_rgba(168,85,247,0.35)] hover:shadow-[0_0_40px_rgba(168,85,247,0.55)] px-7 py-3.5 rounded-sm text-sm font-bold uppercase tracking-wider"
             >
               {bike.isPreOrder ? "Pre-Order Now" : "Buy Now"}
