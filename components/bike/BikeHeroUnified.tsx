@@ -192,7 +192,12 @@ export function BikeHeroUnified({ bike, variants, activeVariantId, onVariantChan
 
   return (
     <>
-      <ReservationModal bike={bike} isOpen={reservationOpen} onClose={() => setReservationOpen(false)} />
+      <ReservationModal
+        bike={bike}
+        isOpen={reservationOpen}
+        onClose={() => setReservationOpen(false)}
+        variantLabel={variants?.find((v) => v.id === activeVariantId)?.label}
+      />
 
       {/* ── Sticky mobile purchase bar ─────────────────────────────────────── */}
       <AnimatePresence>

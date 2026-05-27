@@ -8,6 +8,8 @@ type Props = {
   bike: BikePageData;
   isOpen: boolean;
   onClose: () => void;
+  /** Label of the currently selected colour variant, e.g. "Sage" */
+  variantLabel?: string;
 };
 
 const TIMEFRAME_OPTIONS = [
@@ -17,14 +19,16 @@ const TIMEFRAME_OPTIONS = [
   { value: "flexible",       label: "Flexible — no rush" },
 ];
 
-export function ReservationModal({ bike, isOpen, onClose }: Props) {
+export function ReservationModal({ bike, isOpen, onClose, variantLabel }: Props) {
   const [step, setStep]         = useState<"form" | "success">("form");
   const [name, setName]         = useState("");
   const [mobile, setMobile]     = useState("");
   const [email, setEmail]       = useState("");
+  const [location, setLocation] = useState("");
   const [timeframe, setTimeframe] = useState("");
   const [notes, setNotes]       = useState("");
   const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState<string | null>(null);
   const [focused, setFocused]   = useState<string | null>(null);
 
   // Close handler — resets form after exit animation plays
@@ -33,7 +37,8 @@ export function ReservationModal({ bike, isOpen, onClose }: Props) {
     setTimeout(() => {
       setStep("form");
       setName(""); setMobile(""); setEmail("");
-      setTimeframe(""); setNotes(""); setLoading(false);
+      setLocation(""); setTimeframe(""); setNotes("");
+      setLoading(false); setError(null);
     }, 380);
   }, [onClose]);
 
@@ -52,12 +57,42 @@ export function ReservationModal({ bike, isOpen, onClose }: Props) {
 
   const canSubmit = name.trim() && mobile.trim() && email.trim() && timeframe;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit) return;
+    if (!canSubmit || loading) return;
+
     setLoading(true);
-    // Simulate async reservation submission
-    setTimeout(() => { setLoading(false); setStep("success"); }, 1000);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/reservation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name:      name.trim(),
+          email:     email.trim(),
+          mobile:    mobile.trim(),
+          bike:      bike.name,
+          variant:   variantLabel ?? "",
+          location:  location.trim(),
+          timeframe,
+          notes:     notes.trim(),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      }
+
+      setStep("success");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Submission failed. Please try again.";
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Accent-tinted focus border for inputs
@@ -192,7 +227,7 @@ export function ReservationModal({ bike, isOpen, onClose }: Props) {
                     <form onSubmit={handleSubmit} className="px-6 pt-5 pb-6">
                       <div className="space-y-3.5">
 
-                        {/* Selected Bike — read-only */}
+                        {/* Selected Bike + Variant — read-only */}
                         <div>
                           <p className="text-[9px] uppercase tracking-[0.42em] text-gray-600 font-semibold mb-1.5">
                             Selected Bike
@@ -201,9 +236,14 @@ export function ReservationModal({ bike, isOpen, onClose }: Props) {
                             className="w-full px-3.5 py-[10px] rounded-sm text-[12.5px] font-semibold border flex items-center justify-between"
                             style={{ borderColor: "rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}
                           >
-                            <span style={{ color: bike.accentHex }}>{bike.name}</span>
+                            <span style={{ color: bike.accentHex }}>
+                              {bike.name}
+                              {variantLabel && (
+                                <span className="text-gray-500 font-normal ml-1.5">· {variantLabel}</span>
+                              )}
+                            </span>
                             <svg
-                              className="w-3 h-3 opacity-50"
+                              className="w-3 h-3 opacity-50 shrink-0"
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
@@ -275,6 +315,26 @@ export function ReservationModal({ bike, isOpen, onClose }: Props) {
                           />
                         </div>
 
+                        {/* Preferred Pickup Location */}
+                        <div>
+                          <label htmlFor="res-location" className="flex items-center gap-2 text-[9px] uppercase tracking-[0.42em] text-gray-600 font-semibold mb-1.5">
+                            Preferred Pickup Location
+                            <span className="normal-case lowercase tracking-normal text-gray-700 font-normal text-[9px]">optional</span>
+                          </label>
+                          <input
+                            id="res-location"
+                            type="text"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            onFocus={() => setFocused("location")}
+                            onBlur={() => setFocused(null)}
+                            placeholder="e.g. Sydney, Melbourne, Brisbane…"
+                            autoComplete="address-level2"
+                            className="w-full px-3.5 py-[10px] rounded-sm text-[13px] placeholder-gray-700 border transition-all duration-200"
+                            style={fieldStyle("location")}
+                          />
+                        </div>
+
                         {/* Preferred Pickup Timeframe */}
                         <div>
                           <label htmlFor="res-timeframe" className="block text-[9px] uppercase tracking-[0.42em] text-gray-600 font-semibold mb-1.5">
@@ -334,6 +394,24 @@ export function ReservationModal({ bike, isOpen, onClose }: Props) {
                           />
                         </div>
                       </div>
+
+                      {/* Error message */}
+                      <AnimatePresence>
+                        {error && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="mt-4 flex items-start gap-2.5 rounded-lg px-3.5 py-3 border border-red-500/20 bg-red-500/[0.07]"
+                          >
+                            <svg className="w-3.5 h-3.5 mt-[1px] shrink-0 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                            </svg>
+                            <p className="text-[12px] text-red-400 leading-snug">{error}</p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                       {/* Submit button */}
                       <button
@@ -412,10 +490,10 @@ export function ReservationModal({ bike, isOpen, onClose }: Props) {
                         Request Received
                       </p>
                       <h3 className="text-[1.5rem] font-black text-white tracking-tight leading-tight mb-3">
-                        Reservation<br />Confirmed
+                        Reservation<br />Submitted
                       </h3>
                       <p className="text-[12.5px] text-gray-400 leading-relaxed max-w-[280px] mx-auto">
-                        Our team will contact you shortly to confirm availability and arrange your pickup appointment.
+                        Reservation submitted successfully. We&rsquo;ll contact you shortly.
                       </p>
 
                       {/* What happens next */}
