@@ -502,12 +502,12 @@ export const arcticLeopard: BikePageData = {
 
 // ─── ULTRA BEE — Orange / Gold ────────────────────────────────────────────────
 export const ultraBee: BikePageData = {
-  name: "Sur-Ron Ultra Bee",
+  name: "26 Sur-Ron Ultra Bee",
   slug: "ultra-bee",
   shopifyHandle: "sur-ron-ultra-bee", // ← update to match your Shopify product handle
   tagline: "Maximum force. Zero restraint.",
   description:
-    "The Sur-Ron Ultra Bee was built for one purpose: to dominate. 21kW peak power, 511 N·m of torque, SRTC traction control, and 115km of range — the most capable machine LBX has ever made.",
+    "The 26 Sur-Ron Ultra Bee was built for one purpose: to dominate. 21kW peak power, 511 N·m of torque, SRTC traction control, and 115km of range — the most capable machine LBX has ever made.",
   price: 8499,
   currencyLabel: "AUD",
   tag: "Pro",
@@ -596,8 +596,8 @@ export const ultraBee: BikePageData = {
   ],
   financing: { months: 60, apr: "4.9%", monthly: 244, down: 1500 },
   faqs: [
-    { q: "What separates the Sur-Ron Ultra Bee from other electric bikes?", a: "18 kW continuous / 21 kW peak power, 511 N·m wheel torque, 0–50 km/h in under 2 seconds, SRTC traction control, BERS regenerative braking, and a removable 74V 60Ah battery — in a race-proven alloy chassis." },
-    { q: "Is the Sur-Ron Ultra Bee competition-legal?", a: "Yes — homologated for closed-course competition in most sanctioned electric off-road racing series. Contact us for your specific series requirements." },
+    { q: "What separates the 26 Sur-Ron Ultra Bee from other electric bikes?", a: "18 kW continuous / 21 kW peak power, 511 N·m wheel torque, 0–50 km/h in under 2 seconds, SRTC traction control, BERS regenerative braking, and a removable 74V 60Ah battery — in a race-proven alloy chassis." },
+    { q: "Is the 26 Sur-Ron Ultra Bee competition-legal?", a: "Yes — homologated for closed-course competition in most sanctioned electric off-road racing series. Contact us for your specific series requirements." },
     { q: "What are the five ride modes?", a: "Eco maximises range with gentle power delivery. Daily balances performance and efficiency. Sport unleashes the full 18 kW. Crawl provides precise low-speed control for technical terrain. Turbo unlocks 21 kW peak power for maximum performance." },
     { q: "What is BERS?", a: "Braking Energy Regeneration System. BERS captures kinetic energy during deceleration and feeds it back into the battery — extending real-world range and reducing brake wear over time." },
     { q: "Is the battery removable?", a: "Yes — the 74V 60Ah lithium-ion pack is fully removable and swappable. Charge it in the bike or remove it entirely to charge indoors, swap for a fresh pack, or transport safely." },
@@ -644,13 +644,13 @@ export const ultraBee: BikePageData = {
 
 // ─── SURRON LIGHT BEE — Stealth / Pre-Order ──────────────────────────────────
 export const lbxBike: BikePageData = {
-  name: "Sur-Ron Light Bee",
+  name: "26 Sur-Ron Light Bee",
   slug: "lbx",
   shopifyHandle: "sur-ron-light-bee",
   shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789977190466:1",
   tagline: "Urban stealth. Redefined.",
   description:
-    "6kW peak power. 250 N·m of torque. 57 kg of aerospace aluminium. The Sur-Ron Light Bee is built for the rider who moves differently — through traffic, over curbs, into whatever the city throws at you.",
+    "6kW peak power. 250 N·m of torque. 57 kg of aerospace aluminium. The 26 Sur-Ron Light Bee is built for the rider who moves differently — through traffic, over curbs, into whatever the city throws at you.",
   price: 5999,
   currencyLabel: "AUD",
   tag: "Pre-Order",
@@ -744,7 +744,7 @@ export const lbxBike: BikePageData = {
     },
     {
       title: "57 kg Ultralight",
-      body: "Aerospace-grade aluminium alloy frame. At 57 kg the Sur-Ron Light Bee feels like nothing else — pick up a line, change direction on instinct, carry it anywhere.",
+      body: "Aerospace-grade aluminium alloy frame. At 57 kg the 26 Sur-Ron Light Bee feels like nothing else — pick up a line, change direction on instinct, carry it anywhere.",
       icon: <FlashIcon />,
     },
     {
@@ -765,7 +765,7 @@ export const lbxBike: BikePageData = {
       a: "Complete the pre-order online to lock in your allocation and price. Allocations are secured in order of purchase. No deposit system — your full purchase secures your position.",
     },
     {
-      q: "When will the Sur-Ron Light Bee be delivered?",
+      q: "When will the 26 Sur-Ron Light Bee be delivered?",
       a: "Estimated Q3 2026 for initial pre-order allocations. We'll send regular build and shipping updates as we get closer to launch.",
     },
     {
@@ -773,11 +773,11 @@ export const lbxBike: BikePageData = {
       a: "Yes — use the Reserve & Pay on Pickup option. No payment is required upfront. You inspect the bike in person at our Australian pickup location, then complete full payment before taking delivery.",
     },
     {
-      q: "What does the Sur-Ron Light Bee weigh?",
+      q: "What does the 26 Sur-Ron Light Bee weigh?",
       a: "57 kg dry weight — significantly lighter than most electric bikes in this class. The aerospace aluminium alloy frame and belt-plus-chain drive system keep mass low without sacrificing durability.",
     },
     {
-      q: "What warranty does the Sur-Ron Light Bee carry?",
+      q: "What warranty does the 26 Sur-Ron Light Bee carry?",
       a: "2-year powertrain warranty (motor, battery, controller) and 1-year frame and components warranty. Extended coverage available at checkout.",
     },
   ],

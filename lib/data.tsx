@@ -30,10 +30,10 @@ export const testimonials = [
     stars: 5,
   },
   {
-    quote: "Got the Sur-Ron Ultra Bee for my son and he's obsessed. The power delivery is smooth enough for a beginner but still thrilling. Perfect starter bike.",
+    quote: "Got the 26 Sur-Ron Ultra Bee for my son and he's obsessed. The power delivery is smooth enough for a beginner but still thrilling. Perfect starter bike.",
     name: "Marcus Reid",
     title: "Parent & Weekend Rider",
-    bike: "Sur-Ron Ultra Bee",
+    bike: "26 Sur-Ron Ultra Bee",
     avatar: "MR",
     accentFrom: "from-emerald-500/20",
     stars: 5,
@@ -51,9 +51,9 @@ export const testimonials = [
 
 export const footerLinks: Record<string, { label: string; href: string }[]> = {
   Bikes: [
-    { label: "Sur-Ron Light Bee — Pre-Order", href: "/bikes/lbx" },
+    { label: "26 Sur-Ron Light Bee — Pre-Order", href: "/bikes/lbx" },
     { label: "Strike Shadow",   href: "/bikes/strike-shadow" },
-    { label: "Sur-Ron Ultra Bee", href: "/bikes/ultra-bee" },
+    { label: "26 Sur-Ron Ultra Bee", href: "/bikes/ultra-bee" },
     { label: "Arctic Leopard",  href: "/bikes/arctic-leopard" },
     { label: "Falcon Pro",       href: "/bikes/falcon" },
   ],

@@ -21,8 +21,8 @@ const TOKEN =
 
 // Handles currently set in lib/bikeData.tsx
 const CONFIGURED_HANDLES = [
-  { bike: "Sur-Ron Light Bee",  handle: "sur-ron-light-bee",  url: `https://${DOMAIN}/products/sur-ron-light-bee` },
-  { bike: "Sur-Ron Ultra Bee",  handle: "sur-ron-ultra-bee",  url: `https://${DOMAIN}/products/sur-ron-ultra-bee` },
+  { bike: "26 Sur-Ron Light Bee",  handle: "sur-ron-light-bee",  url: `https://${DOMAIN}/products/sur-ron-light-bee` },
+  { bike: "26 Sur-Ron Ultra Bee",  handle: "sur-ron-ultra-bee",  url: `https://${DOMAIN}/products/sur-ron-ultra-bee` },
   { bike: "Falcon Pro",         handle: "falcon-pro",         url: `https://${DOMAIN}/products/falcon-pro` },
   { bike: "Arctic Leopard",     handle: "arctic-leopard",     url: `https://${DOMAIN}/products/arctic-leopard` },
   { bike: "Strike Shadow",      handle: "strike-shadow",      url: `https://${DOMAIN}/products/strike-shadow` },

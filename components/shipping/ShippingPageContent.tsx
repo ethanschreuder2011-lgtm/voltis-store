@@ -260,7 +260,7 @@ export function ShippingPageContent() {
               <div>
                 <p className="text-[10px] uppercase tracking-[0.42em] text-purple-400/70 font-bold mb-3">Pre-Order Fulfillment</p>
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-4 leading-tight">
-                  Sur-Ron Light Bee<br />
+                  26 Sur-Ron Light Bee<br />
                   <span className="bg-gradient-to-r from-purple-400 to-violet-300 bg-clip-text text-transparent">
                     Shipping Info
                   </span>

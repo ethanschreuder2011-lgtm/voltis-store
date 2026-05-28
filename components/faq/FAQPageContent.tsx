@@ -61,7 +61,7 @@ const FAQ_CATEGORIES: { id: string; label: string; icon: string; items: { q: str
     icon: "⚡",
     items: [
       { q: "Can I charge at home with standard power?", a: "Yes. All Voltis Emoto bikes charge from a standard 240V Australian power outlet using the included charger. No special infrastructure or electrical modifications required." },
-      { q: "How long does a full charge take?", a: "Charging times vary by model. The Sur-Ron Light Bee charges to full in approximately 3–4 hours from flat. Higher-spec models with larger batteries may take 4–6 hours. Fast charging is available on select models." },
+      { q: "How long does a full charge take?", a: "Charging times vary by model. The 26 Sur-Ron Light Bee charges to full in approximately 3–4 hours from flat. Higher-spec models with larger batteries may take 4–6 hours. Fast charging is available on select models." },
       { q: "Can I charge at public charging stations?", a: "Our bikes use standard residential chargers rather than DC fast charge infrastructure. They are designed for home charging. Some models support faster charging with compatible equipment — check individual model specs." },
       { q: "Does cold weather affect charging?", a: "Lithium batteries charge most efficiently at moderate temperatures. In very cold conditions, charging may take slightly longer. Avoid charging a completely discharged battery in temperatures below 5°C." },
       { q: "Should I always charge to 100%?", a: "For daily use, charging to 80–90% and not letting the battery drop below 20% extends long-term battery life. Full charges are fine for days when you need maximum range." },
@@ -117,11 +117,11 @@ const FAQ_CATEGORIES: { id: string; label: string; icon: string; items: { q: str
     label: "Stock & Preorders",
     icon: "📦",
     items: [
-      { q: "Which bikes are in stock?", a: "The Strike Shadow, Sur-Ron Ultra Bee, Arctic Leopard, and Falcon Pro are currently in stock and available for purchase or pickup. The Sur-Ron Light Bee is available as a pre-order with estimated delivery Q3 2026." },
+      { q: "Which bikes are in stock?", a: "The Strike Shadow, 26 Sur-Ron Ultra Bee, Arctic Leopard, and Falcon Pro are currently in stock and available for purchase or pickup. The 26 Sur-Ron Light Bee is available as a pre-order with estimated delivery Q3 2026." },
       { q: "How does the pre-order queue work?", a: "Pre-orders are fulfilled in strict order of deposit payment. The earlier your deposit, the earlier in the queue you are. When your allocation is confirmed, we'll contact you with a dispatch timeline." },
       { q: "Can I change my pre-order details?", a: "Yes — contact us before your bike is dispatched and we can update delivery address, colour selection (if applicable), or other details." },
       { q: "What happens if the delivery estimate changes?", a: "We keep all pre-order customers informed of any changes to estimated delivery dates. If timelines shift, you'll receive an email update. Your deposit remains fully refundable throughout." },
-      { q: "Will more allocation become available?", a: "We aim to maintain ongoing stock of in-range models. For the Sur-Ron Light Bee, initial allocations are limited — we'll communicate if additional rounds of pre-orders open." },
+      { q: "Will more allocation become available?", a: "We aim to maintain ongoing stock of in-range models. For the 26 Sur-Ron Light Bee, initial allocations are limited — we'll communicate if additional rounds of pre-orders open." },
     ],
   },
   {

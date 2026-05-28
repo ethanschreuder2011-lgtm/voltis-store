@@ -14,9 +14,9 @@ import { lbxBike } from "@/lib/bikeData";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sur-Ron Light Bee — Pre-Order Now | Voltis Emoto",
+  title: "26 Sur-Ron Light Bee — Pre-Order Now | Voltis Emoto",
   description:
-    "The Sur-Ron Light Bee. 6kW, 57 kg, 75 km/h. Arriving Q3 2026 — secure your pre-order allocation today.",
+    "The 26 Sur-Ron Light Bee. 6kW, 57 kg, 75 km/h. Arriving Q3 2026 — secure your pre-order allocation today.",
 };
 
 export default function LBXPage() {
