@@ -136,7 +136,7 @@ const FlashIcon = () => (
   </svg>
 );
 
-// ─── STRIKE SHADOW — Deep Blue / Stealth ─────────────────────────────────────
+// ─── STRIKE SHADOW — Black / Crimson Red ─────────────────────────────────────
 export const strikeShadow: BikePageData = {
   name: "Strike Shadow",
   slug: "strike-shadow",
@@ -150,13 +150,13 @@ export const strikeShadow: BikePageData = {
   tag: "Urban",
   badge: "Fast Ace Suspension · G518 Display",
   featured: true,
-  tagColor: "border-blue-500/40 text-blue-400 bg-blue-500/10",
-  titleGradient: "from-blue-400 via-sky-300 to-blue-200",
-  barColor: "bg-blue-500",
-  barGradient: "bg-gradient-to-r from-blue-500 to-sky-400",
-  accentFrom: "from-blue-600/25",
-  glowColor: "rgba(59, 130, 246, 0.22)",
-  accentHex: "#3b82f6",
+  tagColor: "border-red-600/40 text-red-400 bg-red-600/10",
+  titleGradient: "from-red-400 via-rose-300 to-red-200",
+  barColor: "bg-red-600",
+  barGradient: "bg-gradient-to-r from-red-700 to-red-500",
+  accentFrom: "from-red-700/25",
+  glowColor: "rgba(220, 38, 38, 0.22)",
+  accentHex: "#dc2626",
   heroImage: "/strike-shadow/strike-shadow.png",
   galleryImages: [
     "/strike-shadow/strike-shadow.png",
