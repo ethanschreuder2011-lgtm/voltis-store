@@ -5,11 +5,11 @@ import { Resend } from "resend";
 // Simple in-memory store per Lambda instance.
 // Allows max 3 submissions per IP within a 60-second window.
 const rateMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT   = 3;
-const RATE_WINDOW  = 60_000; // ms
+const RATE_LIMIT  = 3;
+const RATE_WINDOW = 60_000; // ms
 
 function isRateLimited(ip: string): boolean {
-  const now  = Date.now();
+  const now   = Date.now();
   const entry = rateMap.get(ip);
   if (!entry || now > entry.resetAt) {
     rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
@@ -71,15 +71,13 @@ function buildEmailHtml(data: {
           <!-- Bike badge -->
           <tr>
             <td style="background:#18181b;padding:0 32px;">
-              <div style="border-top:1px solid #27272a;border-bottom:1px solid #27272a;padding:16px 0;display:flex;align-items:center;justify-content:space-between;">
-                <div>
-                  <p style="margin:0 0 3px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#6b7280;font-weight:600;">
-                    Reserved Bike
-                  </p>
-                  <p style="margin:0;font-size:18px;font-weight:900;color:#ffffff;letter-spacing:-0.01em;">
-                    ${data.bike}${data.variant ? ` <span style="font-weight:400;color:#9ca3af;">· ${data.variant}</span>` : ""}
-                  </p>
-                </div>
+              <div style="border-top:1px solid #27272a;border-bottom:1px solid #27272a;padding:16px 0;">
+                <p style="margin:0 0 3px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#6b7280;font-weight:600;">
+                  Reserved Bike
+                </p>
+                <p style="margin:0;font-size:18px;font-weight:900;color:#ffffff;letter-spacing:-0.01em;">
+                  ${data.bike}${data.variant ? ` <span style="font-weight:400;color:#9ca3af;">· ${data.variant}</span>` : ""}
+                </p>
               </div>
             </td>
           </tr>
@@ -88,13 +86,13 @@ function buildEmailHtml(data: {
           <tr>
             <td style="background:#ffffff;padding:8px 0;">
               <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-                ${row("Full Name",    data.name)}
-                ${row("Email",        `<a href="mailto:${data.email}" style="color:#7c3aed;text-decoration:none;">${data.email}</a>`)}
-                ${row("Mobile",       `<a href="tel:${data.mobile}" style="color:#7c3aed;text-decoration:none;">${data.mobile}</a>`)}
+                ${row("Full Name",       data.name)}
+                ${row("Email",           `<a href="mailto:${data.email}" style="color:#7c3aed;text-decoration:none;">${data.email}</a>`)}
+                ${row("Mobile",          `<a href="tel:${data.mobile}" style="color:#7c3aed;text-decoration:none;">${data.mobile}</a>`)}
                 ${row("Pickup Location", data.location)}
-                ${row("Timeframe",    data.timeframe)}
+                ${row("Timeframe",       data.timeframe)}
                 ${data.notes ? row("Notes", data.notes.replace(/\n/g, "<br />")) : ""}
-                ${row("Submitted",    data.submittedAt)}
+                ${row("Submitted",       data.submittedAt)}
               </table>
             </td>
           </tr>
@@ -137,7 +135,10 @@ export async function POST(req: NextRequest) {
     req.headers.get("x-real-ip") ??
     "unknown";
 
+  console.log(`[Reservation] Request from IP: ${ip}`);
+
   if (isRateLimited(ip)) {
+    console.warn(`[Reservation] Rate limited IP: ${ip}`);
     return NextResponse.json(
       { error: "Too many requests. Please wait a moment and try again." },
       { status: 429 }
@@ -149,6 +150,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
+    console.error("[Reservation] Failed to parse request body");
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
@@ -163,6 +165,7 @@ export async function POST(req: NextRequest) {
   if (!timeframe?.trim()) missing.push("timeframe");
 
   if (missing.length) {
+    console.warn(`[Reservation] Validation failed — missing: ${missing.join(", ")}`);
     return NextResponse.json(
       { error: `Missing required fields: ${missing.join(", ")}` },
       { status: 422 }
@@ -171,27 +174,33 @@ export async function POST(req: NextRequest) {
 
   // ── Basic email format check ────────────────────────────────────────────────
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    console.warn(`[Reservation] Invalid email address: ${email}`);
     return NextResponse.json({ error: "Invalid email address." }, { status: 422 });
   }
 
-  // ── Check env vars ──────────────────────────────────────────────────────────
-  const apiKey   = process.env.RESEND_API_KEY;
-  const storeEmail = process.env.STORE_EMAIL;
-  const fromEmail  = process.env.FROM_EMAIL ?? "reservations@voltisemoto.com.au";
+  // ── Resolve env vars ────────────────────────────────────────────────────────
+  const apiKey     = process.env.RESEND_API_KEY;
+  const storeEmail = process.env.STORE_EMAIL ?? "voltisemoto@gmail.com";
+  // Use onboarding@resend.dev by default — works without domain verification.
+  // Switch to a custom address (e.g. reservations@voltisemoto.com.au) once
+  // your domain is verified in the Resend dashboard.
+  const fromEmail  = process.env.FROM_EMAIL ?? "onboarding@resend.dev";
 
-  if (!apiKey || !storeEmail) {
-    console.error("[Reservation] Missing env vars: RESEND_API_KEY or STORE_EMAIL");
+  console.log(`[Reservation] Config — to: ${storeEmail}, from: ${fromEmail}, hasApiKey: ${!!apiKey}`);
+
+  if (!apiKey) {
+    console.error("[Reservation] RESEND_API_KEY is not set");
     return NextResponse.json(
       { error: "Email service is not configured. Please contact us directly." },
       { status: 503 }
     );
   }
 
-  // ── Format timestamp (AEST) ─────────────────────────────────────────────────
+  // ── Build email payload ─────────────────────────────────────────────────────
   const submittedAt = new Date().toLocaleString("en-AU", {
-    timeZone:    "Australia/Sydney",
-    dateStyle:   "full",
-    timeStyle:   "short",
+    timeZone:  "Australia/Sydney",
+    dateStyle: "full",
+    timeStyle: "short",
   });
 
   const timeframeLabel: Record<string, string> = {
@@ -202,35 +211,57 @@ export async function POST(req: NextRequest) {
   };
 
   const emailData = {
-    name:        name.trim(),
-    email:       email.trim().toLowerCase(),
-    mobile:      mobile.trim(),
-    bike:        bike.trim(),
-    variant:     (variant ?? "").trim(),
-    location:    (location ?? "").trim(),
-    timeframe:   timeframeLabel[timeframe] ?? timeframe,
-    notes:       (notes ?? "").trim(),
+    name:      name.trim(),
+    email:     email.trim().toLowerCase(),
+    mobile:    mobile.trim(),
+    bike:      bike.trim(),
+    variant:   (variant ?? "").trim(),
+    location:  (location ?? "").trim(),
+    timeframe: timeframeLabel[timeframe] ?? timeframe,
+    notes:     (notes ?? "").trim(),
     submittedAt,
   };
 
+  const subject = `New Reservation — ${emailData.bike}${emailData.variant ? ` (${emailData.variant})` : ""} · ${emailData.name}`;
+
+  console.log(`[Reservation] Sending email — subject: "${subject}", to: ${storeEmail}, from: ${fromEmail}`);
+
   // ── Send via Resend ─────────────────────────────────────────────────────────
+  // IMPORTANT: resend.emails.send() does NOT throw on API errors — it returns
+  // { data, error }. Always check the error field explicitly.
   const resend = new Resend(apiKey);
 
+  let sendResult: Awaited<ReturnType<typeof resend.emails.send>>;
   try {
-    await resend.emails.send({
-      from:     `Voltis Emoto <${fromEmail}>`,
-      to:       [storeEmail],
-      replyTo:  emailData.email,
-      subject:  `New Reservation — ${emailData.bike}${emailData.variant ? ` (${emailData.variant})` : ""} · ${emailData.name}`,
-      html:     buildEmailHtml(emailData),
+    sendResult = await resend.emails.send({
+      from:    `Voltis Emoto <${fromEmail}>`,
+      to:      [storeEmail],
+      replyTo: emailData.email,
+      subject,
+      html:    buildEmailHtml(emailData),
     });
-  } catch (err) {
-    console.error("[Reservation] Resend error:", err);
+  } catch (networkErr) {
+    // Only thrown on actual network/connection failures
+    const msg = networkErr instanceof Error ? networkErr.message : String(networkErr);
+    console.error(`[Reservation] Network error calling Resend: ${msg}`);
     return NextResponse.json(
-      { error: "Failed to send reservation. Please try again or contact us directly." },
+      { error: `Email failed to send (network error): ${msg}` },
       { status: 502 }
     );
   }
 
-  return NextResponse.json({ success: true }, { status: 200 });
+  // ── Check Resend's returned error field ─────────────────────────────────────
+  if (sendResult.error) {
+    const resendError = sendResult.error;
+    console.error(
+      `[Reservation] Resend API error — name: ${resendError.name}, message: ${resendError.message}`
+    );
+    return NextResponse.json(
+      { error: `Email failed: ${resendError.message}` },
+      { status: 502 }
+    );
+  }
+
+  console.log(`[Reservation] Email sent successfully — id: ${sendResult.data?.id}`);
+  return NextResponse.json({ success: true, emailId: sendResult.data?.id }, { status: 200 });
 }
