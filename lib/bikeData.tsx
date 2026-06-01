@@ -839,6 +839,25 @@ export const lbxBike: BikePageData = {
       available: true,
       shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789977223234:1",
     },
+    {
+      id: "white",
+      label: "White",
+      colorHex: "#f0f0f0",
+      accentHex: "#c8d0d8",
+      glowColor: "rgba(200, 210, 220, 0.12)",
+      titleGradient: "from-white via-gray-100 to-gray-300",
+      heroImage: "/lbx/white.png",
+      galleryImages: [
+        "/lbx/white.png",
+        "/lbx/side-white.png",
+        "/lbx/front-white.png",
+        "/lbx/frame-white.jpg",
+        "/lbx/suspension-white.jpg",
+        "/lbx/wheels-white.jpg",
+      ],
+      available: true,
+      shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43807625904194:1",
+    },
   ],
 };
 
