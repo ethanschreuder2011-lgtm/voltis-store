@@ -141,6 +141,7 @@ export const strikeShadow: BikePageData = {
   name: "Strike Shadow",
   slug: "strike-shadow",
   shopifyHandle: "strike-shadow",
+  shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43743029395522:1",
   tagline: "Stealth mode. Maximum impact.",
   description:
     "Designed for high-performance off-road riding. The Strike Shadow pairs 7kW of peak power with a reinforced steel frame, Fast Ace suspension, and Samsung lithium-ion efficiency — built for riders who refuse to be held back.",
