@@ -851,7 +851,7 @@ export const bikePages: Record<string, BikePageData> = {
 };
 
 // Ordered display list — single source for all UI that shows a bike list.
-export const allBikes: BikePageData[] = [lbxBike, ultraBee, falcon, arcticLeopard, strikeShadow];
+export const allBikes: BikePageData[] = [lbxBike, ultraBee, strikeShadow, falcon, arcticLeopard];
 
 // Derive the 4-row comparison table from a bike's performanceStats.
 // Keeps SpecsSection in sync with product-page stats automatically.
