@@ -650,7 +650,7 @@ export const lbxBike: BikePageData = {
   shopifyCartUrl: "https://voltisemotos.myshopify.com/cart/43789977190466:1",
   tagline: "Urban stealth. Redefined.",
   description:
-    "6kW peak power. 250 N·m of torque. 57 kg of aerospace aluminium. The 26 Sur-Ron Light Bee is built for the rider who moves differently — through traffic, over curbs, into whatever the city throws at you.",
+    "10kW peak power. 250 N·m of torque. 57 kg of aerospace aluminium. The 26 Sur-Ron Light Bee is built for the rider who moves differently — through traffic, over curbs, into whatever the city throws at you.",
   price: 5999,
   currencyLabel: "AUD",
   tag: "Pre-Order",
@@ -696,15 +696,15 @@ export const lbxBike: BikePageData = {
     },
   },
   heroStats: [
-    { label: "Top Speed", value: "75 km/h" },
+    { label: "Top Speed", value: "85 km/h" },
     { label: "Range", value: "75 km" },
     { label: "Dry Weight", value: "57 kg" },
   ],
   performanceCallout: { value: "250", unit: "N·m", label: "Wheel Torque · Sport Mode" },
   performanceStats: [
-    { label: "Top Speed", value: "75", unit: "km/h", pct: 75 },
+    { label: "Top Speed", value: "85", unit: "km/h", pct: 85 },
     { label: "Range", value: "75", unit: "km", pct: 75 },
-    { label: "Motor Power", value: "6", unit: "kW", pct: 48 },
+    { label: "Motor Power", value: "10", unit: "kW", pct: 80 },
     { label: "Charge Time", value: "3.5", unit: "hrs", pct: 80, isDecimal: true },
   ],
   specGroups: [
@@ -712,9 +712,9 @@ export const lbxBike: BikePageData = {
       title: "Electrical",
       specs: [
         { label: "Motor", value: "PMSM Mid Motor" },
-        { label: "Peak Power", value: "6 kW" },
+        { label: "Peak Power", value: "10 kW" },
         { label: "Max Torque", value: "250 N·m" },
-        { label: "Battery", value: "60V 40Ah Lithium (Removable)" },
+        { label: "Battery", value: "72V 25Ah Lithium (Removable)" },
         { label: "Charge Time", value: "2.5–3.5 hrs" },
         { label: "Ride Modes", value: "Eco / Sport" },
         { label: "Drive System", value: "Belt + Chain Drive" },
@@ -738,8 +738,8 @@ export const lbxBike: BikePageData = {
   ],
   features: [
     {
-      title: "6 kW · 250 N·m",
-      body: "PMSM mid motor delivers 250 N·m of instantaneous torque via belt and chain drive. Sport mode hits 75 km/h in near-silence. This is what urban performance feels like.",
+      title: "10 kW · 250 N·m",
+      body: "PMSM mid motor delivers 250 N·m of instantaneous torque via belt and chain drive. Sport mode hits 85 km/h in near-silence. This is what urban performance feels like.",
       icon: <BoltIcon />,
     },
     {
@@ -753,8 +753,8 @@ export const lbxBike: BikePageData = {
       icon: <AdjustIcon />,
     },
     {
-      title: "Removable 60V Battery",
-      body: "60V 40Ah lithium pack charges in 2.5–3.5 hours and lifts clean out of the frame. Charge indoors, swap for a fresh pack, or carry a spare.",
+      title: "Removable 72V Battery",
+      body: "72V 25Ah lithium pack charges in 2.5–3.5 hours and lifts clean out of the frame. Charge indoors, swap for a fresh pack, or carry a spare.",
       icon: <ChipIcon />,
     },
   ],
